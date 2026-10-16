@@ -55,6 +55,32 @@ Antes de mudar qualquer valor do registro, o programa salva o valor original em
 > porque o programa não tem assinatura digital paga. Clique em **Mais informações > Executar assim mesmo**.
 > Se não confiar no executável, leia o código em `tweaks.py` e gere o seu próprio (veja abaixo).
 
+### Verificar o arquivo baixado
+
+Cada versão traz também o `1155.exe.sha256`. Para conferir que o arquivo não foi alterado:
+
+```powershell
+Get-FileHash .\1155.exe -Algorithm SHA256
+```
+
+O resultado deve ser igual ao conteúdo do `1155.exe.sha256`.
+
+## Rodar pelo PowerShell (sem baixar nada)
+
+Existe também uma versão em PowerShell (`1155.ps1`) com as mesmas 21 opções. Ela não precisa de Python nem do `.exe`.
+Abra o **Windows PowerShell** (o `powershell`, não o `pwsh`) e cole:
+
+```powershell
+irm https://raw.githubusercontent.com/andriolimerinogustavo-hue/1155-otimiza-o/main/1155.ps1 | iex
+```
+
+O script pede permissão de administrador sozinho. O backup usa o mesmo arquivo da versão em Python
+(`%APPDATA%\TweaksMenu\backup.json`), então a opção **Reverter** de uma versão também desfaz o que a outra fez.
+
+> Nunca rode `irm ... | iex` de um endereço que você não conhece. Leia o [`1155.ps1`](1155.ps1) antes.
+> Se preferir, baixe o arquivo e rode: `powershell -ExecutionPolicy Bypass -File .\1155.ps1`.
+> O script não tem acentos de propósito, para funcionar em qualquer PowerShell.
+
 ## Requisitos
 
 - Windows 10 ou 11
